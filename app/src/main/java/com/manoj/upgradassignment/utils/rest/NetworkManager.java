@@ -28,18 +28,14 @@ public final class NetworkManager {
     }
 
     private void fromJsonObject(final RequestCallback requestCallback) {
-        ConnectivityManager cm =
-                (ConnectivityManager) Rest.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
+
+        boolean isConnected = isNetworkConnected();
         if (!isConnected) {
             if (requestCallback != null) {
                 requestCallback.onRequestError("Please turn on internet connection");
             }
             return;
         }
-
         JsonObjectRequest request = new JsonObjectRequest(method, pathUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -67,9 +63,16 @@ public final class NetworkManager {
         networkHelper.addToRequestQueue(request);
     }
 
-
     public void withCallback(RequestCallback callback) {
         fromJsonObject(callback);
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm =
+                (ConnectivityManager) Rest.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
     }
 
     public static class Builder implements INetworkManagerBuilder {

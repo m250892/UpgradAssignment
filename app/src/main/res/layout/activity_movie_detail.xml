@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.manoj.upgradassignment.MovieDetailActivity">
+
+    <ImageView
+        android:id="@+id/movie_backdrop_img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/movie_backdrop_height"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        style="@style/normal_text_black"
+        android:layout_marginLeft="@dimen/normal"
+        android:layout_marginRight="@dimen/normal"
+        android:layout_marginTop="@dimen/small"
+        android:text="@string/overview"
+        android:textSize="@dimen/font_medium" />
+
+    <TextView
+        android:id="@+id/movie_over_view"
+        style="@style/normal_text"
+        android:layout_marginLeft="@dimen/normal"
+        android:layout_marginRight="@dimen/normal"
+        android:layout_marginTop="@dimen/very_small"
+        android:text="XXXX" />
+</LinearLayout>
