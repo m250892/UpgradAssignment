@@ -16,6 +16,8 @@ dependencies:
 
 test:
   override:
+    - ./gradlew test
+    - ./gradlew assemble
     # start the emulator
     - emulator -avd circleci-android22 -no-audio -no-window:
         background: true
@@ -26,10 +28,8 @@ test:
     - sleep 30
     - adb shell input keyevent 82
     # run tests  against the emulator.
-           - ./gradlew test
-           - ./gradlew cAT
-           - ./gradlew assemble
 
+    - ./gradlew connectedAndroidTest -PdisablePreDex
     # copy the build outputs to artifacts
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
