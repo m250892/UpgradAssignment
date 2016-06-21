@@ -9,6 +9,7 @@ import com.manoj.upgradassignment.model.Movie;
 import com.manoj.upgradassignment.model.MovieListPage;
 import com.manoj.upgradassignment.utils.rest.RequestCallback;
 import com.manoj.upgradassignment.utils.rest.Rest;
+import com.manoj.upgradassignment.view.MovieDatabaseView;
 import com.manoj.upgradassignment.view.MovieGridView;
 
 import java.lang.ref.WeakReference;
@@ -19,8 +20,10 @@ import java.lang.ref.WeakReference;
 public class MovieGridPresenter {
 
     private WeakReference<MovieGridView> view;
+    private MovieDatabaseView movieDatabase;
 
     public MovieGridPresenter(MovieGridView movieGridView) {
+        movieDatabase = MovieDatabase.getInstance();
         bindView(movieGridView);
     }
 
@@ -41,29 +44,30 @@ public class MovieGridPresenter {
     }
 
     public void loadData() {
-        if (MovieDatabase.getInstance().isDataComplete()) {
+        Log.d("manoj", "load data called");
+        if (movieDatabase.isDataComplete()) {
             return;
         }
-        if (MovieDatabase.getInstance().getLastKnowPage() == 0) {
+        if (movieDatabase.getLastKnowPage() == 0) {
             loadFirstPage();
         } else {
             loadNextPage();
         }
     }
 
-    private void loadFirstPage() {
+    public void loadFirstPage() {
         view().showLoading();
         loadNextPage();
     }
 
     private void loadNextPage() {
-        int pageNo = MovieDatabase.getInstance().getNextPage();
+        int pageNo = movieDatabase.getNextPage();
         fetchData(pageNo);
     }
 
     private void fetchData(final int pageNo) {
         Log.d("manoj", "fetch result for page : " + pageNo);
-        int sortType = MovieDatabase.getInstance().getSortOrder();
+        int sortType = movieDatabase.getSortOrder();
         String url = Constants.getMovieListUrl(pageNo, sortType);
         Rest.GET().load(url).as(MovieListPage.class).withCallback(new RequestCallback<MovieListPage>() {
             @Override
@@ -83,7 +87,7 @@ public class MovieGridPresenter {
         if (pageNo == 1) {
             view().showMovieGrid();
         }
-        MovieDatabase.getInstance().insertPageData(movieList);
+        movieDatabase.insertPageData(movieList);
         view().onMovieGridDataChanged();
     }
 
@@ -98,15 +102,15 @@ public class MovieGridPresenter {
     }
 
     public void onMovieSelected(int position) {
-        Movie data = MovieDatabase.getInstance().getItem(position);
+        Movie data = movieDatabase.getItem(position);
         view().openMovieDetailPage(data);
     }
 
     public void onSortOrderChange(int type) {
         //sort order change
-        if (MovieDatabase.getInstance().getSortOrder() != type) {
-            MovieDatabase.getInstance().setSortOrder(type);
-            MovieDatabase.getInstance().clearData();
+        if (movieDatabase.getSortOrder() != type) {
+            movieDatabase.setSortOrder(type);
+            movieDatabase.clearData();
             view().onMovieGridDataChanged();
             loadFirstPage();
         } else {

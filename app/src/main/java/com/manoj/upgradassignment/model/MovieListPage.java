@@ -31,4 +31,20 @@ public class MovieListPage {
     public int getTotalPages() {
         return totalPages;
     }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
+    public void setTotalResults(int totalResults) {
+        this.totalResults = totalResults;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
+    }
 }

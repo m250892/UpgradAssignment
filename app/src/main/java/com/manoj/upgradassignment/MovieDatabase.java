@@ -2,6 +2,7 @@ package com.manoj.upgradassignment;
 
 import com.manoj.upgradassignment.model.Movie;
 import com.manoj.upgradassignment.model.MovieListPage;
+import com.manoj.upgradassignment.view.MovieDatabaseView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by manoj on 20/06/16.
  */
-public class MovieDatabase {
+public class MovieDatabase implements MovieDatabaseView {
     private static MovieDatabase instance;
     private List<Movie> movies;
     private int lastKnowPage;
