@@ -67,7 +67,7 @@ public final class NetworkManager {
         fromJsonObject(callback);
     }
 
-    private boolean isNetworkConnected() {
+    public boolean isNetworkConnected() {
         ConnectivityManager cm =
                 (ConnectivityManager) Rest.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
