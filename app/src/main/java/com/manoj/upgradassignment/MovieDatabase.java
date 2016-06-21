@@ -2,6 +2,7 @@ package com.manoj.upgradassignment;
 
 import com.manoj.upgradassignment.model.Movie;
 import com.manoj.upgradassignment.model.MovieListPage;
+import com.manoj.upgradassignment.dialog.SortType;
 import com.manoj.upgradassignment.view.MovieDatabaseView;
 
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ public class MovieDatabase implements MovieDatabaseView {
     private int lastKnowPage;
 
     private int totalPages;
-    private int sortOrder;
+    private SortType sortOrder;
 
     private MovieDatabase() {
         movies = new ArrayList<>();
-        sortOrder = 0;
+        sortOrder = SortType.POPULARITY;
         totalPages = -1;
         lastKnowPage = 0;
     }
@@ -73,11 +74,11 @@ public class MovieDatabase implements MovieDatabaseView {
         return getMovies().get(position);
     }
 
-    public int getSortOrder() {
+    public SortType getSortOrder() {
         return sortOrder;
     }
 
-    public void setSortOrder(int sortOrder) {
+    public void setSortOrder(SortType sortOrder) {
         this.sortOrder = sortOrder;
     }
 }

@@ -7,6 +7,7 @@ import com.manoj.upgradassignment.Constants;
 import com.manoj.upgradassignment.MovieDatabase;
 import com.manoj.upgradassignment.model.Movie;
 import com.manoj.upgradassignment.model.MovieListPage;
+import com.manoj.upgradassignment.dialog.SortType;
 import com.manoj.upgradassignment.utils.rest.RequestCallback;
 import com.manoj.upgradassignment.utils.rest.Rest;
 import com.manoj.upgradassignment.view.MovieDatabaseView;
@@ -67,7 +68,7 @@ public class MovieGridPresenter {
 
     private void fetchData(final int pageNo) {
         Log.d("manoj", "fetch result for page : " + pageNo);
-        int sortType = movieDatabase.getSortOrder();
+        SortType sortType = movieDatabase.getSortOrder();
         String url = Constants.getMovieListUrl(pageNo, sortType);
         Rest.GET().load(url).as(MovieListPage.class).withCallback(new RequestCallback<MovieListPage>() {
             @Override
@@ -95,6 +96,11 @@ public class MovieGridPresenter {
         if (pageNo == 1) {
             view().showError();
         }
+        showToast(error);
+    }
+
+    private void showToast(String error) {
+        view().showTaost(error);
     }
 
     public void onSortClicked() {
@@ -106,7 +112,7 @@ public class MovieGridPresenter {
         view().openMovieDetailPage(data);
     }
 
-    public void onSortOrderChange(int type) {
+    public void onSortOrderChange(SortType type) {
         //sort order change
         if (movieDatabase.getSortOrder() != type) {
             movieDatabase.setSortOrder(type);

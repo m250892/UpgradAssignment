@@ -2,6 +2,7 @@ package com.manoj.upgradassignment.view;
 
 import com.manoj.upgradassignment.model.Movie;
 import com.manoj.upgradassignment.model.MovieListPage;
+import com.manoj.upgradassignment.dialog.SortType;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public interface MovieDatabaseView {
 
     Movie getItem(int position);
 
-    int getSortOrder();
+    SortType getSortOrder();
 
-    void setSortOrder(int sortOrder);
+    void setSortOrder(SortType sortOrder);
 }

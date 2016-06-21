@@ -2,6 +2,7 @@ package com.manoj.upgradassignment;
 
 import com.manoj.upgradassignment.model.Movie;
 import com.manoj.upgradassignment.model.MovieListPage;
+import com.manoj.upgradassignment.dialog.SortType;
 import com.manoj.upgradassignment.view.MovieDatabaseView;
 
 import org.junit.Before;
@@ -118,10 +119,10 @@ public class MovieDatabaseTesting {
 
     public void testOrderSetTest() {
         movieDatabase.clearData();
-        movieDatabase.setSortOrder(0);
-        assertEquals(movieDatabase.getSortOrder(), 0);
-        movieDatabase.setSortOrder(1);
-        assertEquals(movieDatabase.getSortOrder(), 1);
+        movieDatabase.setSortOrder(SortType.POPULARITY);
+        assertEquals(movieDatabase.getSortOrder(), SortType.POPULARITY);
+        movieDatabase.setSortOrder(SortType.HIGHEST_RATED);
+        assertEquals(movieDatabase.getSortOrder(), SortType.HIGHEST_RATED);
     }
 
 }

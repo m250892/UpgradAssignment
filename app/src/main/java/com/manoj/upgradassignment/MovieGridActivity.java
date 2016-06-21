@@ -11,9 +11,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.manoj.upgradassignment.dialog.SortDialog;
 import com.manoj.upgradassignment.model.Movie;
+import com.manoj.upgradassignment.dialog.SortType;
 import com.manoj.upgradassignment.presenter.MovieGridPresenter;
 import com.manoj.upgradassignment.view.AdapterView;
 import com.manoj.upgradassignment.view.MovieGridAdapter;
@@ -103,6 +105,11 @@ public class MovieGridActivity extends AppCompatActivity implements MovieGridVie
     }
 
     @Override
+    public void showTaost(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void showLoading() {
         hideErrorLayout();
         hideMovieGridView();
@@ -169,7 +176,7 @@ public class MovieGridActivity extends AppCompatActivity implements MovieGridVie
     }
 
     @Override
-    public void onSortTypeSelected(int type) {
+    public void onSortTypeSelected(SortType type) {
         presenter.onSortOrderChange(type);
     }
 
@@ -177,12 +184,12 @@ public class MovieGridActivity extends AppCompatActivity implements MovieGridVie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.retry_button:
-                 onRetryButtonClick();
+                onRetryButtonClick();
                 break;
         }
     }
 
-    private void onRetryButtonClick(){
+    private void onRetryButtonClick() {
         presenter.onRetryBtnClick();
     }
 }

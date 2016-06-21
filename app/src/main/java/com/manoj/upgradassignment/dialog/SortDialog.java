@@ -31,7 +31,7 @@ public class SortDialog extends DialogFragment {
         builder.setTitle(R.string.dialog_sort)
                 .setItems(R.array.sort_type, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                sortDialogCallback.onSortTypeSelected(which);
+                                sortDialogCallback.onSortTypeSelected(getSortType(which));
                             }
                         }
                 );
@@ -39,7 +39,12 @@ public class SortDialog extends DialogFragment {
         return builder.create();
     }
 
+
+    public SortType getSortType(int which) {
+        return SortType.fromOrdinal(which);
+    }
+
     public interface ISortDialogCallback {
-        void onSortTypeSelected(int type);
+        void onSortTypeSelected(SortType type);
     }
 }

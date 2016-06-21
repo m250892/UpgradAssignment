@@ -24,4 +24,6 @@ public interface MovieGridView {
     boolean isMovieGridViewVisible();
 
     boolean isErrorViewVisible();
+
+    void showTaost(String error);
 }
