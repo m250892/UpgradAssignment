@@ -1,9 +1,11 @@
 package com.manoj.upgradassignment;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.manoj.upgradassignment.model.Movie;
@@ -38,9 +40,17 @@ public class MovieDetailActivity extends AppCompatActivity {
     private void initViews() {
         ImageView poster = (ImageView) findViewById(R.id.movie_backdrop_img);
         TextView overview = (TextView) findViewById(R.id.movie_over_view);
-        ImageLoader.getInstance().loadImage(movie.getBackDropUrl(), poster);
+        ImageLoader.getInstance().loadImage(movie.getBackDropUrl(), poster,
+                ContextCompat.getDrawable(this, R.drawable.image_while_loading),
+                ContextCompat.getDrawable(this, R.drawable.no_image_available));
         overview.setText(movie.getOverview());
         getSupportActionBar().setTitle(movie.getTitle());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        TextView releaseDate = (TextView) findViewById(R.id.release_data_view);
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.rating_bar);
+
+        releaseDate.setText(movie.getReleaseData());
+        ratingBar.setRating(movie.getVoteAverage());
     }
 }

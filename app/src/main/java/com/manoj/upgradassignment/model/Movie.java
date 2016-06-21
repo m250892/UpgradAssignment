@@ -21,7 +21,7 @@ public class Movie implements Serializable {
     @SerializedName("backdrop_path")
     private String backdropPath;
     @SerializedName("vote_average")
-    private double voteAverage;
+    private float voteAverage;
 
     private String posterUrl;
     private String backdropUrl;
@@ -46,8 +46,8 @@ public class Movie implements Serializable {
         return originalTitle;
     }
 
-    public double getVoteAverage() {
-        return voteAverage;
+    public float getVoteAverage() {
+        return voteAverage / 2.0f;
     }
 
     public String getPosterUrl() {

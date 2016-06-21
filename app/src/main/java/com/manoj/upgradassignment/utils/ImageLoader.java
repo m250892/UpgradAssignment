@@ -44,6 +44,8 @@ public class ImageLoader {
             if (imageView != null && !TextUtils.isEmpty(url)) {
                 Picasso.with(context)
                         .load(url)
+                        .error(drawableOnFailure)
+                        .placeholder(drawableWhileLoading)
                         .into(imageView);
             } else {
                 setDrawable(imageView, drawableOnFailure);

@@ -37,7 +37,10 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Movie movie = movieDatabase.getItem(position);
-        ImageLoader.getInstance().loadImage(movie.getPosterUrl(), holder.imageView, ContextCompat.getDrawable(context, R.drawable.no_image_available));
+        ImageLoader.getInstance().loadImage(movie.getPosterUrl(),
+                holder.imageView,
+                ContextCompat.getDrawable(context, R.drawable.image_while_loading),
+                ContextCompat.getDrawable(context, R.drawable.no_image_available));
 
         //sending call for next item
         if (position == getItemCount() - 1) {
